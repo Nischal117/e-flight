@@ -5,8 +5,12 @@
 #include <sstream>
 #include <limits>
 
+#define ACODE 117
 
 using namespace std;
+
+
+
 
  class User {
  private: 
@@ -14,6 +18,14 @@ using namespace std;
     string password;
 
  public:
+ /*same as
+    User(string uname , string pwd)
+        {
+        username = uname;
+        password = pwd;
+        }
+
+ */
     User(string uname , string pwd):username(uname) , password(pwd){}
   
 
@@ -71,7 +83,7 @@ using namespace std;
   ofstream out("user.txt" , ios::app);
   if(out.is_open())
   {
-    cout << username << "," << password << "\n";
+    out << username << "," << password << "\n";
     out.close();
     return true;
   }
@@ -166,11 +178,54 @@ using namespace std;
 
   }
 
-
-    
-
-
   };
+
+
+class Admin {
+    private: 
+    string adminName;
+   
+   public:
+    Admin(string a_name):adminName(a_name){};
+
+
+ 
+// check the authentication of admin
+    static bool adminLogin(string* admin_name){
+       //   *admin_name;
+          int attempt = 0;
+    //    map <string> adminData;
+        ifstream adminFile("adminUser.txt");
+
+        if(!adminFile.is_open())
+          {
+            cout << "Error Openning Admin file" << endl;
+            return false; 
+          }
+        
+        string line;
+        while(getline(adminFile , line))
+         {
+          if(line == (*admin_name))
+          {
+              return true;
+          }
+          attempt++;
+
+          if(attempt > 2) return false;
+
+         }
+
+        adminFile.close();
+
+      return false;  
+
+            
+    }
+
+
+    };
+
 
 
 
@@ -181,14 +236,38 @@ int main() {
         cout << "1--> SignUp" << endl;
         cout << "2--> LogIn" << endl;
         cout << "3--> Exit" << endl;
+        cout << "4--> Admin Panel" << endl;
+
 
         int ask_user_choice;
-        cout << "Enter your choice (1-3): ";
-        while (!(cin >> ask_user_choice) || ask_user_choice < 1 || ask_user_choice > 3) {
-            cout << "Invalid choice. Enter 1, 2, or 3: ";
+        cout << "Enter your choice (1-4): ";
+        while (!(cin >> ask_user_choice) || ask_user_choice < 1 || ask_user_choice > 4) {
+            cout << "Invalid choice. Enter 1, 2, 3 or 4: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
+
+    if(ask_user_choice == 4) {
+
+        string Admin_ID;
+        cout << "Enter admin Id : " ;
+        cin >> Admin_ID;
+        cin.ignore();
+
+        
+
+        if(Admin::adminLogin(&Admin_ID))
+        {
+      cout << "Welcome to admin Panal : Your login was successfull." << endl;
+        }
+        else
+         cout << "Login unsuccessfull." << endl;
+
+                      
+   
+
+    }
+
 
         if (ask_user_choice == 3) {
             cout << "Exiting system." << endl;
