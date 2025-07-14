@@ -4,3 +4,4 @@ nischal,karki
 nsich,123
 new,daypass
 ash,pikachu
+dexie,har1:3

@@ -4,6 +4,7 @@
 #include <map>
 #include <sstream>
 #include <limits>
+#include <flight.h>
 
 #define ACODE 117
 
@@ -248,7 +249,7 @@ int main() {
         }
 
     if(ask_user_choice == 4) {
-
+        bool isAuthenticated = false;
         string Admin_ID;
         cout << "Enter admin Id : " ;
         cin >> Admin_ID;
@@ -260,15 +261,41 @@ int main() {
         {
       int code;
      
+     
       cout << "Your name is in admin DataBase." << endl;
    cout << "Enter the final verification code : " << endl;
-   cin >> code;   
-   cout << (code == ACODE ? "Login Successful" : "Login Unsuccessful") << endl;
+   cin >> code; 
+   if(code == ACODE)
+       {
+        cout << "Login Successful" << endl;
+        isAuthenticated = true;
+       } 
+       else
+        {
+         cout << "Login Unsuccessful" << endl;
+        }
+  // cout << (code == ACODE ? "Login Successful" : "Login Unsuccessful") << endl;
        }
    else
    cout << "Login unsuccessful." << endl;
 
-                      
+  
+
+  // Reexamine this carefully..
+    if(isAuthenticated == true)
+      {
+        int adminChoice;
+        cout << "1--> ADD Flight" << endl;
+        cout << "2--> REMOVE Flight" << endl;
+        cin >> adminChoice;
+        cin.ignore();
+        
+        
+
+
+
+      }    
+       
    
 
     }
