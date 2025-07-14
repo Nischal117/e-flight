@@ -258,10 +258,15 @@ int main() {
 
         if(Admin::adminLogin(&Admin_ID))
         {
-      cout << "Welcome to admin Panal : Your login was successfull." << endl;
-        }
-        else
-         cout << "Login unsuccessfull." << endl;
+      int code;
+     
+      cout << "Your name is in admin DataBase." << endl;
+   cout << "Enter the final verification code : " << endl;
+   cin >> code;   
+   cout << (code == ACODE ? "Login Successful" : "Login Unsuccessful") << endl;
+       }
+   else
+   cout << "Login unsuccessful." << endl;
 
                       
    
